@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\core\EmployeeManagement.Application\EmployeeManagement.Application.csproj" />
+    <ProjectReference Include="..\..\Core\EmployeeManagement.Application\EmployeeManagement.Application.csproj" />
   </ItemGroup>
 
 </Project>
