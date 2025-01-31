@@ -15,6 +15,7 @@ namespace EmployeeManagement.Domain
         public decimal? Budget { get; set; }
 
         [ForeignKey("ManagerId")]
+        [NotMapped]
         public Employee Employee { get; set; }
         public List<Employee> Employees { get; set; }
     }
