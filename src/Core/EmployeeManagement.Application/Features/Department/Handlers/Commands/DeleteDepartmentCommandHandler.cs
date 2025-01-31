@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EmployeeManagement.Application.Features.Department.Requests.Commands;
 using EmployeeManagement.Application.Persistence.Contracts;
+using EmployeeManagement.Domain;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,9 @@ namespace EmployeeManagement.Application.Features.Department.Handlers.Commands
         }
         public async Task<Unit> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
         {
-            var department = await departmentRepository.Get(request.Id);
-            await departmentRepository.Delete(department);
+            EmployeeManagement.Domain.Department department = await departmentRepository.Get(request.Id);
+            department.Status = "inactive";
+            await departmentRepository.Update(department);
             return Unit.Value;
         }
     }

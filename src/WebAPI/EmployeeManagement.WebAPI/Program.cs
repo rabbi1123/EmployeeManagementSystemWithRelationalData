@@ -18,6 +18,14 @@ namespace EmployeeManagement.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(o =>
+            {
+                o.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -27,9 +35,10 @@ namespace EmployeeManagement.WebAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseHttpsRedirection();
             app.UseAuthorization();
 
-
+            app.UseCors("CorsPolicy");
             app.MapControllers();
 
             app.Run();

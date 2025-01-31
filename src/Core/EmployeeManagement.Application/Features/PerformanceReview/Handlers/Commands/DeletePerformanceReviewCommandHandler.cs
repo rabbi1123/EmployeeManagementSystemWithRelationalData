@@ -23,8 +23,9 @@ namespace EmployeeManagement.Application.Features.PerformanceReview.Handlers.Com
         }
         public async Task<Unit> Handle(DeletePerformanceReviewCommand request, CancellationToken cancellationToken)
         {
-            var review = await performanceReviewRepository.Get(request.Id);
-            await performanceReviewRepository.Delete(review);
+            EmployeeManagement.Domain.PerformanceReview review = await performanceReviewRepository.Get(request.Id);
+            review.Status = "inactive";
+            await performanceReviewRepository.Update(review);
             return Unit.Value;
         }
     }

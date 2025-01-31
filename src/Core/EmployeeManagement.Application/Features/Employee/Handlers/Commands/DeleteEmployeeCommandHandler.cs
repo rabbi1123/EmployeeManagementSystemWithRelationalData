@@ -22,8 +22,9 @@ namespace EmployeeManagement.Application.Features.Employee.Handlers.Commands
         }
         public async Task<Unit> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = await employeeRepository.Get(request.Id);
-            await employeeRepository.Delete(employee);
+            EmployeeManagement.Domain.Employee employee = await employeeRepository.Get(request.Id);
+            employee.Status = "inactive";
+            await employeeRepository.Update(employee);
             return Unit.Value;
         }
     }

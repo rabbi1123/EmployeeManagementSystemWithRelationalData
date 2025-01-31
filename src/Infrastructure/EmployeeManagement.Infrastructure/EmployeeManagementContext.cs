@@ -30,6 +30,7 @@ namespace EmployeeManagement.Infrastructure
                 if(entry.State == EntityState.Added)
                 {
                     entry.Entity.DateCreated = DateTime.Now;
+                    entry.Entity.Status = "active";
                 }
             }
             return base.SaveChangesAsync(cancellationToken);
